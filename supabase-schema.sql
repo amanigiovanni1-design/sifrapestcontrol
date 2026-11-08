@@ -39,3 +39,22 @@ on public.bookings
 for insert
 to anon
 with check (true);
+
+drop policy if exists "Staff can view client registrations" on public.clients;
+create policy "Staff can view client registrations"
+on public.clients
+for select
+to authenticated
+using ((auth.jwt() -> 'app_metadata' ->> 'role') = 'staff');
+
+drop policy if exists "Staff can view bookings" on public.bookings;
+create policy "Staff can view bookings"
+on public.bookings
+for select
+to authenticated
+using ((auth.jwt() -> 'app_metadata' ->> 'role') = 'staff');
+
+-- Create each staff account in Supabase Authentication, then assign its role with:
+-- update auth.users
+-- set raw_app_meta_data = coalesce(raw_app_meta_data, '{}'::jsonb) || '{"role":"staff"}'::jsonb
+-- where email = 'staff@example.com';

@@ -377,9 +377,84 @@
             </div>
             <div class="text-center text-sm">
                 <p>&copy; 2024 SIFRA Pest Control Zambia. All rights reserved. | ZEMA Certified | PACRA Registered</p>
+                <button id="staff-login-button" type="button" class="mt-4 text-gray-500 hover:text-white transition">
+                    <i class="fas fa-user-shield mr-2"></i>Staff login
+                </button>
             </div>
         </div>
     </footer>
+
+    <div id="staff-login-modal" class="hidden fixed inset-0 z-[60] bg-black/60 px-4 py-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="staff-login-title">
+        <div class="relative max-w-md mx-auto mt-16 bg-white rounded-xl shadow-2xl p-6 md:p-8">
+            <button id="staff-login-close" type="button" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-xl" aria-label="Close staff login">&times;</button>
+            <h2 id="staff-login-title" class="text-2xl font-bold text-sifra-green mb-2">Staff login</h2>
+            <p class="text-gray-600 mb-6">Sign in to view bookings and member registrations.</p>
+            <form id="staff-login-form" class="space-y-4">
+                <div>
+                    <label for="staff-email" class="block text-sm font-medium text-gray-700 mb-1">Email address</label>
+                    <input id="staff-email" name="email" type="email" required autocomplete="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-sifra-green outline-none">
+                </div>
+                <div>
+                    <label for="staff-password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <input id="staff-password" name="password" type="password" required autocomplete="current-password" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-sifra-green outline-none">
+                </div>
+                <p id="staff-login-error" class="hidden text-red-600 text-sm" role="alert"></p>
+                <button type="submit" class="w-full bg-sifra-green hover:bg-sifra-light-green text-white font-bold py-3 rounded-lg transition">
+                    Sign in
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="staff-dashboard" class="hidden fixed inset-0 z-[70] bg-gray-100 overflow-y-auto">
+        <header class="bg-sifra-green text-white px-4 md:px-8 py-5">
+            <div class="max-w-6xl mx-auto flex justify-between items-center gap-4">
+                <div>
+                    <p class="text-sm text-white/70">SIFRA Pest Control</p>
+                    <h1 class="text-xl md:text-2xl font-bold">Staff dashboard</h1>
+                </div>
+                <button id="staff-logout" type="button" class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Log out
+                </button>
+            </div>
+        </header>
+        <main class="max-w-6xl mx-auto px-4 md:px-8 py-8">
+            <div class="flex flex-wrap gap-2 mb-6">
+                <button type="button" data-staff-tab="bookings" class="staff-tab bg-sifra-green text-white px-5 py-2 rounded-lg font-semibold">Online bookings</button>
+                <button type="button" data-staff-tab="members" class="staff-tab bg-white text-gray-700 px-5 py-2 rounded-lg font-semibold border">Member registrations</button>
+                <button id="staff-refresh" type="button" class="ml-auto bg-white text-sifra-green px-5 py-2 rounded-lg font-semibold border">
+                    <i class="fas fa-sync-alt mr-2"></i>Refresh
+                </button>
+            </div>
+            <p id="staff-data-error" class="hidden bg-red-50 text-red-700 border border-red-200 rounded-lg px-4 py-3 mb-6" role="alert"></p>
+            <section id="staff-bookings-panel">
+                <div class="bg-white rounded-xl shadow overflow-hidden">
+                    <div class="px-5 py-4 border-b"><h2 class="text-lg font-bold text-gray-800">People who booked online</h2></div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-gray-50 text-gray-600"><tr>
+                                <th class="px-5 py-3">Name</th><th class="px-5 py-3">Contact</th><th class="px-5 py-3">Service</th><th class="px-5 py-3">Preferred date</th><th class="px-5 py-3">Time</th><th class="px-5 py-3">Status</th><th class="px-5 py-3">Requested</th>
+                            </tr></thead>
+                            <tbody id="staff-bookings-body"><tr><td colspan="7" class="px-5 py-8 text-center text-gray-500">Loading bookings...</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <section id="staff-members-panel" class="hidden">
+                <div class="bg-white rounded-xl shadow overflow-hidden">
+                    <div class="px-5 py-4 border-b"><h2 class="text-lg font-bold text-gray-800">Registered members</h2></div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-gray-50 text-gray-600"><tr>
+                                <th class="px-5 py-3">Name</th><th class="px-5 py-3">Contact</th><th class="px-5 py-3">Property type</th><th class="px-5 py-3">Address</th><th class="px-5 py-3">Marketing</th><th class="px-5 py-3">Registered</th>
+                            </tr></thead>
+                            <tbody id="staff-members-body"><tr><td colspan="6" class="px-5 py-8 text-center text-gray-500">Loading registrations...</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -502,3 +577,160 @@
             submitBtn.disabled = false;
             submitBtn.textContent = 'Register Client';
         });
+
+        const staffLoginButton = document.getElementById('staff-login-button');
+        const staffLoginModal = document.getElementById('staff-login-modal');
+        const staffLoginClose = document.getElementById('staff-login-close');
+        const staffLoginForm = document.getElementById('staff-login-form');
+        const staffLoginError = document.getElementById('staff-login-error');
+        const staffDashboard = document.getElementById('staff-dashboard');
+
+        const showStaffLoginError = (message) => {
+            staffLoginError.textContent = message;
+            staffLoginError.classList.remove('hidden');
+        };
+
+        const isStaff = (session) => session?.user?.app_metadata?.role === 'staff';
+
+        staffLoginButton.addEventListener('click', () => {
+            staffLoginModal.classList.remove('hidden');
+            document.getElementById('staff-email').focus();
+        });
+
+        const closeStaffLogin = () => {
+            staffLoginModal.classList.add('hidden');
+            staffLoginError.classList.add('hidden');
+            staffLoginForm.reset();
+        };
+        staffLoginClose.addEventListener('click', closeStaffLogin);
+        staffLoginModal.addEventListener('click', (event) => {
+            if (event.target === staffLoginModal) closeStaffLogin();
+        });
+
+        const escapeStaffText = (value) => String(value ?? '')
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;')
+            .replaceAll('"', '&quot;')
+            .replaceAll("'", '&#039;');
+
+        const formatStaffDate = (value, includeTime = false) => {
+            if (!value) return '-';
+            const date = new Date(value);
+            return Number.isNaN(date.getTime()) ? '-' : date.toLocaleString(undefined, includeTime
+                ? { dateStyle: 'medium', timeStyle: 'short' }
+                : { dateStyle: 'medium' });
+        };
+
+        const showStaffDataError = (error) => {
+            const message = document.getElementById('staff-data-error');
+            message.textContent = `Could not load staff data: ${error.message || 'Please try again.'}`;
+            message.classList.remove('hidden');
+        };
+
+        const loadStaffData = async () => {
+            document.getElementById('staff-data-error').classList.add('hidden');
+            const [bookingsResult, membersResult] = await Promise.all([
+                supabase.from('bookings').select('*').order('created_at', { ascending: false }),
+                supabase.from('clients').select('*').order('created_at', { ascending: false })
+            ]);
+
+            if (bookingsResult.error || membersResult.error) {
+                showStaffDataError(bookingsResult.error || membersResult.error);
+            }
+
+            const bookingsBody = document.getElementById('staff-bookings-body');
+            if (bookingsResult.data?.length) {
+                bookingsBody.innerHTML = bookingsResult.data.map((booking) => `
+                    <tr class="border-t">
+                        <td class="px-5 py-4 font-medium">${escapeStaffText(booking.full_name)}</td>
+                        <td class="px-5 py-4"><div>${escapeStaffText(booking.phone)}</div><div class="text-gray-500">${escapeStaffText(booking.email)}</div></td>
+                        <td class="px-5 py-4">${escapeStaffText(booking.service)}</td>
+                        <td class="px-5 py-4">${formatStaffDate(booking.preferred_date)}</td>
+                        <td class="px-5 py-4">${escapeStaffText(booking.preferred_time)}</td>
+                        <td class="px-5 py-4">${escapeStaffText(booking.status)}</td>
+                        <td class="px-5 py-4">${formatStaffDate(booking.created_at, true)}</td>
+                    </tr>`).join('');
+            } else {
+                bookingsBody.innerHTML = '<tr><td colspan="7" class="px-5 py-8 text-center text-gray-500">No online bookings yet.</td></tr>';
+            }
+
+            const membersBody = document.getElementById('staff-members-body');
+            if (membersResult.data?.length) {
+                membersBody.innerHTML = membersResult.data.map((member) => `
+                    <tr class="border-t">
+                        <td class="px-5 py-4 font-medium">${escapeStaffText(member.full_name)}</td>
+                        <td class="px-5 py-4"><div>${escapeStaffText(member.phone)}</div><div class="text-gray-500">${escapeStaffText(member.email)}</div></td>
+                        <td class="px-5 py-4">${escapeStaffText(member.property_type)}</td>
+                        <td class="px-5 py-4">${escapeStaffText(member.address)}</td>
+                        <td class="px-5 py-4">${member.marketing_consent ? 'Yes' : 'No'}</td>
+                        <td class="px-5 py-4">${formatStaffDate(member.created_at, true)}</td>
+                    </tr>`).join('');
+            } else {
+                membersBody.innerHTML = '<tr><td colspan="6" class="px-5 py-8 text-center text-gray-500">No member registrations yet.</td></tr>';
+            }
+        };
+
+        const showStaffDashboard = async (session) => {
+            if (!isStaff(session)) {
+                await supabase.auth.signOut();
+                showStaffLoginError('This account is not authorised for staff access.');
+                return;
+            }
+            closeStaffLogin();
+            staffDashboard.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+            await loadStaffData();
+        };
+
+        staffLoginForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            staffLoginError.classList.add('hidden');
+            const submitButton = staffLoginForm.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Signing in...';
+            const fields = new FormData(staffLoginForm);
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: fields.get('email'),
+                password: fields.get('password')
+            });
+            submitButton.disabled = false;
+            submitButton.textContent = 'Sign in';
+            if (error) {
+                showStaffLoginError(error.message);
+                return;
+            }
+            await showStaffDashboard(data.session);
+        });
+
+        document.querySelectorAll('[data-staff-tab]').forEach((button) => {
+            button.addEventListener('click', () => {
+                const showingBookings = button.dataset.staffTab === 'bookings';
+                document.getElementById('staff-bookings-panel').classList.toggle('hidden', !showingBookings);
+                document.getElementById('staff-members-panel').classList.toggle('hidden', showingBookings);
+                document.querySelectorAll('[data-staff-tab]').forEach((tab) => {
+                    tab.classList.toggle('bg-sifra-green', tab === button);
+                    tab.classList.toggle('text-white', tab === button);
+                    tab.classList.toggle('bg-white', tab !== button);
+                    tab.classList.toggle('text-gray-700', tab !== button);
+                });
+            });
+        });
+
+        document.getElementById('staff-refresh').addEventListener('click', loadStaffData);
+        document.getElementById('staff-logout').addEventListener('click', async () => {
+            await supabase.auth.signOut();
+            staffDashboard.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !staffLoginModal.classList.contains('hidden')) closeStaffLogin();
+        });
+
+        supabase.auth.getSession().then(({ data }) => {
+            if (isStaff(data.session)) showStaffDashboard(data.session);
+        });
+    </script>
+</body>
+</html>
