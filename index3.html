@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial - scale=1.0">
+	<title> My Anime Den</title>
+	<link rel ="stylesheet" href="style.css">
+	
+</head>
+<body>
+	<header>
+		<nav>
+			<div> class = "logo"> ANIMESPOT</div>
+			<ul>
+				<li><a href="#"> Home </a></li>
+				<li><a href="#"> Trending  </a></li>
+				<li><a href="#"> Genres  </a></li>
+			</ul>
+		</nav>
+	</header>
+	
+	
+	<main>
+		<section class="hero">
+			<h1> Latest Updates</h1>
+			<p>Catch the newest episodes and reviews here. </p>
+		</section>
+		
+		<section class="upload-section">
+			<h2>Post New Anime</h2>
+			<form action ="upload.php" method="POST" enctype="multipart/form-data">
+				<input type="text" name="anime_title" placeholder="Anime Title" required>
+				<input type="file" name="anime_file" accept="image/*,video/*" required>
+				<button type="submit" name="submit"> upload and post </button>
+			</form>
+		</section>
+
+		
+					<section class = "post-grid">
+					<?php
+					$files = glob("uploads/*.{jpg,png,gif,mp4}", GLOB_BRACE);
+					foreach($files as $file){
+						echo'<div class="anime-card">';
+						echo '<img src="' .$file. '" alt="Anime Post">';
+						echo '<h3>' . basename($file) . '</h3>';
+						echo '</div>';
+						}
+					?>
+					</section>
+
+		<section class="post-grid">
+		<!-- Anime Post Card -->
+		<divclass="anime-card">
+			<img src ="images/IMG_20230828_202845.jpg" alt="The Ghost of the past">
+			<h3> Anime Title</h3>
+			<p>Action, Adventure</p>
+			<button>Read More</button>
+		</div>
+		<!-- Repeat for more posts -->
+	</section>
+	
+</main>
+</body>
+
+</html>
+

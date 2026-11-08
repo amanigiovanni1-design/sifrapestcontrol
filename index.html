@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIFRA Pest Control | Protecting Zambian Homes & Businesses</title>
+    <meta name="description" content="SIFRA Pest Control offers eco-friendly, effective pest management in Zambia. Specializing in termite, mosquito, and rodent control for homes and businesses.">
+    
+    <!-- Tailwind CSS for modern, responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sifra-green': '#1A4D2E',
+                        'sifra-light-green': '#4F6F52',
+                        'sifra-gold': '#E8DFCA',
+                        'sifra-amber': '#F5A623',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Custom animations and base styles */
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .hero-bg {
+            background-image: linear-gradient(rgba(26, 77, 46, 0.85), rgba(26, 77, 46, 0.9)), url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-sifra-green tracking-tight">
+                SIFRA<span class="text-sifra-amber">.</span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex space-x-8 font-medium text-gray-700">
+                <li><a href="#services" class="hover:text-sifra-green transition">Services</a></li>
+                <li><a href="#about" class="hover:text-sifra-green transition">Why SIFRA</a></li>
+                <li><a href="#areas" class="hover:text-sifra-green transition">Service Areas</a></li>
+                <li><a href="#contact" class="hover:text-sifra-green transition">Contact</a></li>
+            </ul>
+
+            <a href="tel:+260971234567" class="hidden md:flex items-center bg-sifra-amber text-white px-5 py-2 rounded-full font-semibold hover:bg-amber-600 transition">
+                <i class="fas fa-phone-alt mr-2"></i> +260 97 123 4567
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-sifra-green text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-6 pb-4">
+            <ul class="space-y-4 font-medium text-gray-700">
+                <li><a href="#services" class="block py-2">Services</a></li>
+                <li><a href="#about" class="block py-2">Why SIFRA</a></li>
+                <li><a href="#areas" class="block py-2">Service Areas</a></li>
+                <li><a href="#contact" class="block py-2">Contact</a></li>
+                <li><a href="tel:+260971234567" class="block py-2 text-sifra-amber font-bold">Call Us Now</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-bg text-white py-24 md:py-36">
+        <div class="container mx-auto px-6 text-center max-w-4xl">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                Defending Zambia, <br> One Home at a Time.
+            </h1>
+            <p class="text-xl md:text-2xl mb-10 text-sifra-gold/90">
+                Advanced, eco-friendly pest control solutions for termites, mosquitoes, rodents, and more. Safe for your family, tough on pests.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#contact" class="bg-sifra-amber hover:bg-amber-600 text-white font-bold py-4 px-8 rounded-full text-lg transition transform hover:scale-105">
+                    Get a Free Inspection
+                </a>
+                <a href="#services" class="bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:bg-white/20 text-white font-bold py-4 px-8 rounded-full text-lg transition">
+                    Our Services
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-sifra-green mb-4">Comprehensive Pest Solutions</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Tailored pest management strategies designed specifically for the Zambian climate and environment.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Service 1: Termites -->
+                <div class="bg-gray-50 p-8 rounded-xl border border-gray-100 hover:shadow-xl transition group">
+                    <div class="w-14 h-14 bg-sifra-green/10 text-sifra-green rounded-lg flex items-center justify-center text-2xl mb-6 group-hover:bg-sifra-green group-hover:text-white transition">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-800">Termite Control</h3>
+                    <p class="text-gray-600">Protect your property's foundation and wooden structures from Zambia's most destructive silent invaders using advanced baiting and soil treatment.</p>
+                </div>
+
+                <!-- Service 2: Mosquitoes -->
+                <div class="bg-gray-50 p-8 rounded-xl border border-gray-100 hover:shadow-xl transition group">
+                    <div class="w-14 h-14 bg-sifra-green/10 text-sifra-green rounded-lg flex items-center justify-center text-2xl mb-6 group-hover:bg-sifra-green group-hover:text-white transition">
+                        <i class="fas fa-shield-virus"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-800">Vector & Mosquito Control</h3>
+                    <p class="text-gray-600">Crucial malaria prevention. We eliminate breeding sites and apply safe residual sprays to keep your family and staff protected from bites.</p>
+                </div>
+
+                <!-- Service 3: Rodents -->
+                <div class="bg-gray-50 p-8 rounded-xl border border-gray-100 hover:shadow-xl transition group">
+                    <div class="w-14 h-14 bg-sifra-green/10 text-sifra-green rounded-lg flex items-center justify-center text-2xl mb-6 group-hover:bg-sifra-green group-hover:text-white transition">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-800">Rodent Management</h3>
+                    <p class="text-gray-600">Strategic baiting and proofing to eliminate rats and mice, preventing property damage and the spread of disease in homes and commercial kitchens.</p>
+                </div>
+
+                <!-- Service 4: Commercial -->
+                <div class="bg-gray-50 p-8 rounded-xl border border-gray-100 hover:shadow-xl transition group">
+                    <div class="w-14 h-14 bg-sifra-green/10 text-sifra-green rounded-lg flex items-center justify-center text-2xl mb-6 group-hover:bg-sifra-green group-hover:text-white transition">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-800">Commercial Fumigation</h3>
+                    <p class="text-gray-600">ZEMA-compliant fumigation for warehouses, farms, and lodges. We ensure your business meets health and safety regulations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US / ABOUT -->
+    <section id="about" class="py-20 bg-sifra-green text-white">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Why Zambians Trust SIFRA</h2>
+                    <p class="text-sifra-gold/90 text-lg mb-8">
+                        We aren't just exterminators; we are pest management professionals. We understand the unique ecological challenges of Zambia, from the humid Zambezi valley to the Copperbelt.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-sifra-amber mt-1 mr-4 text-xl"></i>
+                            <span><strong>ZEMA Certified:</strong> All our chemicals and processes comply with the Zambia Environmental Management Agency.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-sifra-amber mt-1 mr-4 text-xl"></i>
+                            <span><strong>Eco-Friendly Products:</strong> We prioritize treatments that are lethal to pests but safe for your children and pets.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-sifra-amber mt-1 mr-4 text-xl"></i>
+                            <span><strong>Guaranteed Results:</strong> If the pests come back before your warranty expires, so do we—at no extra cost.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
+                    <h3 class="text-2xl font-bold mb-4 text-sifra-amber">Our Process</h3>
+                    <ol class="space-y-4 text-sifra-gold/90">
+                        <li class="flex items-center"><span class="bg-sifra-amber text-sifra-green font-bold w-8 h-8 rounded-full flex items-center justify-center mr-4">1</span> Free On-Site Inspection</li>
+                        <li class="flex items-center"><span class="bg-sifra-amber text-sifra-green font-bold w-8 h-8 rounded-full flex items-center justify-center mr-4">2</span> Customized Treatment Plan</li>
+                        <li class="flex items-center"><span class="bg-sifra-amber text-sifra-green font-bold w-8 h-8 rounded-full flex items-center justify-center mr-4">3</span> Safe & Effective Application</li>
+                        <li class="flex items-center"><span class="bg-sifra-amber text-sifra-green font-bold w-8 h-8 rounded-full flex items-center justify-center mr-4">4</span> Follow-up & Prevention Advice</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICE AREAS -->
+    <section id="areas" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-sifra-green mb-4">Proudly Serving Across Zambia</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto mb-12">From the bustling streets of Lusaka to the tourist hubs of Livingstone, our rapid-response teams are always nearby.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <span class="bg-white px-6 py-3 rounded-full shadow-sm font-medium text-gray-700 border border-gray-200">Lusaka</span>
+                <span class="bg-white px-6 py-3 rounded-full shadow-sm font-medium text-gray-700 border border-gray-200">Copperbelt (Ndola/Kitwe)</span>
+                <span class="bg-white px-6 py-3 rounded-full shadow-sm font-medium text-gray-700 border border-gray-200">Livingstone</span>
+                <span class="bg-white px-6 py-3 rounded-full shadow-sm font-medium text-gray-700 border border-gray-200">Kabwe</span>
+                <span class="bg-white px-6 py-3 rounded-full shadow-sm font-medium text-gray-700 border border-gray-200">Chipata</span>
+                <span class="bg-white px-6 py-3 rounded-full shadow-sm font-medium text-gray-700 border border-gray-200">Solwezi</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-sifra-green mb-6">Get a Free Quote Today</h2>
+                    <p class="text-gray-600 mb-8">Don't let pests take over. Contact us for a rapid, no-obligation inspection and quote.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-sifra-green/10 text-sifra-green rounded-lg flex items-center justify-center text-xl mr-4">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Head Office</h4>
+                                <p class="text-gray-600">Plot 1234, Great East Road, <br>Lusaka, Zambia</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-sifra-green/10 text-sifra-green rounded-lg flex items-center justify-center text-xl mr-4">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Call / WhatsApp</h4>
+                                <p class="text-gray-600">+260 77 790 7071 <br>+260 77 790 7071</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-sifra-green/10 text-sifra-green rounded-lg flex items-center justify-center text-xl mr-4">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Email Us</h4>
+                                <p class="text-gray-600">info@sifrapestcontrol.co.zm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100">
+                    <form id="contact-form" class="space-y-5">
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-sifra-green focus:border-transparent outline-none transition" placeholder="John Mwansa">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                                <input type="tel" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-sifra-green focus:border-transparent outline-none transition" placeholder="+260 97...">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                            <input type="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-sifra-green focus:border-transparent outline-none transition" placeholder="john@example.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Type of Pest / Service Needed</label>
+                            <select required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-sifra-green focus:border-transparent outline-none transition bg-white">
+                                <option value="">Select a service...</option>
+                                <option>Termite Inspection & Treatment</option>
+                                <option>Mosquito / Malaria Vector Control</option>
+                                <option>Rodent Control</option>
+                                <option>General Fumigation</option>
+                                <option>Other / Not Sure</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Message / Details</label>
+                            <textarea rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-sifra-green focus:border-transparent outline-none transition" placeholder="Tell us about your pest problem..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-sifra-green hover:bg-sifra-light-green text-white font-bold py-4 px-6 rounded-lg transition transform hover:scale-[1.02]">
+                            Request Free Inspection
+                        </button>
+                        <p id="form-success" class="hidden text-center text-green-600 font-semibold mt-4">
+                            <i class="fas fa-check-circle mr-2"></i> Thank you! We will contact you shortly.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center border-b border-gray-800 pb-8 mb-8">
+                <a href="#" class="text-2xl font-bold text-white tracking-tight mb-4 md:mb-0">
+                    SIFRA<span class="text-sifra-amber">.</span>
+                </a>
+                <div class="flex space-x-6 text-xl">
+                    <a href="#" class="hover:text-sifra-amber transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-sifra-amber transition"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="hover:text-sifra-amber transition"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="hover:text-sifra-amber transition"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="text-center text-sm">
+                <p>&copy; 2024 SIFRA Pest Control Zambia. All rights reserved. | ZEMA Certified | PACRA Registered</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // 1. Mobile Menu Toggle Logic
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            // Toggle icon between bars and times (close)
+            const icon = menuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuBtn.querySelector('i').classList.add('fa-bars');
+                menuBtn.querySelector('i').classList.remove('fa-times');
+            });
+        });
+
+        // 2. Contact Form Handling (Simulated)
+        const form = document.getElementById('contact-form');
+        const successMsg = document.getElementById('form-success');
+
+        form.addEventListener('submit', (e) => {
+            // Prevent the default page reload on form submission
+            e.preventDefault(); 
+            
+            // In a real application, you would use fetch() or XMLHttpRequest 
+            // here to send the data to your backend (e.g., Node.js, PHP, or an API like Formspree).
+            
+            // Simulate network delay
+            const submitBtn = form.que
