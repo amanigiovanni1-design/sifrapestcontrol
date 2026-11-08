@@ -26,6 +26,10 @@ create table if not exists public.bookings (
 alter table public.clients enable row level security;
 alter table public.bookings enable row level security;
 
+grant usage on schema public to anon, authenticated;
+grant select on public.clients to authenticated;
+grant select on public.bookings to authenticated;
+
 drop policy if exists "Website can register clients" on public.clients;
 create policy "Website can register clients"
 on public.clients

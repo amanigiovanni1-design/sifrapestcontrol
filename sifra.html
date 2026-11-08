@@ -640,7 +640,9 @@
             }
 
             const bookingsBody = document.getElementById('staff-bookings-body');
-            if (bookingsResult.data?.length) {
+            if (bookingsResult.error) {
+                bookingsBody.innerHTML = '<tr><td colspan="7" class="px-5 py-8 text-center text-red-600">Bookings could not be accessed.</td></tr>';
+            } else if (bookingsResult.data?.length) {
                 bookingsBody.innerHTML = bookingsResult.data.map((booking) => `
                     <tr class="border-t">
                         <td class="px-5 py-4 font-medium">${escapeStaffText(booking.full_name)}</td>
@@ -656,7 +658,9 @@
             }
 
             const membersBody = document.getElementById('staff-members-body');
-            if (membersResult.data?.length) {
+            if (membersResult.error) {
+                membersBody.innerHTML = '<tr><td colspan="6" class="px-5 py-8 text-center text-red-600">Registrations could not be accessed.</td></tr>';
+            } else if (membersResult.data?.length) {
                 membersBody.innerHTML = membersResult.data.map((member) => `
                     <tr class="border-t">
                         <td class="px-5 py-4 font-medium">${escapeStaffText(member.full_name)}</td>
