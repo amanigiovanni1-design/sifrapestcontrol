@@ -460,7 +460,7 @@
 
     <!-- JAVASCRIPT -->
     <script>
-        const supabase = window.supabase.createClient(
+        const sifraSupabase = window.supabase.createClient(
             'https://maerrzgczbpgacywxfhm.supabase.co',
             'sb_publishable_LYH5hpatT95CiBtMV9xviw_4kpuuX_f'
         );
@@ -471,7 +471,7 @@
             sessionStorage.setItem('sifra-presence-key', visitorId);
         }
 
-        const presenceChannel = supabase.channel('room:sifra-clients:presence', {
+        const presenceChannel = sifraSupabase.channel('room:sifra-clients:presence', {
             config: {
                 presence: { key: visitorId }
             }
@@ -527,7 +527,7 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
             const fields = new FormData(form);
-            const { error } = await supabase.from('bookings').insert({
+            const { error } = await sifraSupabase.from('bookings').insert({
                 full_name: fields.get('name'),
                 phone: fields.get('phone'),
                 email: fields.get('email'),
@@ -557,7 +557,7 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Registering...';
             const fields = new FormData(registrationForm);
-            const { error } = await supabase.from('clients').insert({
+            const { error } = await sifraSupabase.from('clients').insert({
                 full_name: fields.get('name'),
                 phone: fields.get('phone'),
                 email: fields.get('email'),
@@ -631,8 +631,8 @@
         const loadStaffData = async () => {
             document.getElementById('staff-data-error').classList.add('hidden');
             const [bookingsResult, membersResult] = await Promise.all([
-                supabase.from('bookings').select('*').order('created_at', { ascending: false }),
-                supabase.from('clients').select('*').order('created_at', { ascending: false })
+                sifraSupabase.from('bookings').select('*').order('created_at', { ascending: false }),
+                sifraSupabase.from('clients').select('*').order('created_at', { ascending: false })
             ]);
 
             if (bookingsResult.error || membersResult.error) {
@@ -673,7 +673,7 @@
 
         const showStaffDashboard = async (session) => {
             if (!isStaff(session)) {
-                await supabase.auth.signOut();
+                await sifraSupabase.auth.signOut();
                 showStaffLoginError('This account is not authorised for staff access.');
                 return;
             }
@@ -690,7 +690,7 @@
             submitButton.disabled = true;
             submitButton.textContent = 'Signing in...';
             const fields = new FormData(staffLoginForm);
-            const { data, error } = await supabase.auth.signInWithPassword({
+            const { data, error } = await sifraSupabase.auth.signInWithPassword({
                 email: fields.get('email'),
                 password: fields.get('password')
             });
@@ -719,7 +719,7 @@
 
         document.getElementById('staff-refresh').addEventListener('click', loadStaffData);
         document.getElementById('staff-logout').addEventListener('click', async () => {
-            await supabase.auth.signOut();
+            await sifraSupabase.auth.signOut();
             staffDashboard.classList.add('hidden');
             document.body.classList.remove('overflow-hidden');
         });
@@ -728,7 +728,7 @@
             if (event.key === 'Escape' && !staffLoginModal.classList.contains('hidden')) closeStaffLogin();
         });
 
-        supabase.auth.getSession().then(({ data }) => {
+        sifraSupabase.auth.getSession().then(({ data }) => {
             if (isStaff(data.session)) showStaffDashboard(data.session);
         });
     </script>
