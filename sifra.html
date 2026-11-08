@@ -427,7 +427,7 @@
                 message: fields.get('message')
             });
             if (error) {
-                alert('We could not save your booking. Please try again.');
+                alert(`Booking could not be saved: ${error.message || 'Please try again.'}`);
                 console.error(error);
             } else {
                 successMsg.classList.remove('hidden');
@@ -456,7 +456,9 @@
                 marketing_consent: fields.get('consent') === 'on'
             });
             if (error) {
-                alert(error.code === '23505' ? 'This email is already registered.' : 'We could not complete your registration. Please try again.');
+                alert(error.code === '23505'
+                    ? 'This email is already registered.'
+                    : `Registration could not be saved: ${error.message || 'Please try again.'}`);
                 console.error(error);
             } else {
                 registrationSuccess.classList.remove('hidden');
