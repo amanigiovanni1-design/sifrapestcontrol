@@ -46,12 +46,16 @@
             </a>
             
             <!-- Desktop Menu -->
-            <ul class="hidden md:flex space-x-8 font-medium text-gray-700">
+            <ul class="hidden md:flex items-center space-x-8 font-medium text-gray-700">
                 <li><a href="#services" class="hover:text-sifra-green transition">Services</a></li>
                 <li><a href="#about" class="hover:text-sifra-green transition">Why SIFRA</a></li>
                 <li><a href="#areas" class="hover:text-sifra-green transition">Service Areas</a></li>
                 <li><a href="#register" class="hover:text-sifra-green transition">Register</a></li>
                 <li><a href="#contact" class="hover:text-sifra-green transition">Contact</a></li>
+                <li id="online-presence" class="flex items-center gap-2 text-sm text-gray-500" aria-live="polite">
+                    <span class="h-2.5 w-2.5 rounded-full bg-green-500"></span>
+                    <span>Checking online clients...</span>
+                </li>
             </ul>
 
             <a href="tel:+260971234567" class="hidden md:flex items-center bg-sifra-amber text-white px-5 py-2 rounded-full font-semibold hover:bg-amber-600 transition">
@@ -385,6 +389,37 @@
             'https://maerrzgczbpgacywxfhm.supabase.co',
             'sb_publishable_LYH5hpatT95CiBtMV9xviw_4kpuuX_f'
         );
+
+        let visitorId = sessionStorage.getItem('sifra-presence-key');
+        if (!visitorId) {
+            visitorId = crypto.randomUUID();
+            sessionStorage.setItem('sifra-presence-key', visitorId);
+        }
+
+        const presenceChannel = supabase.channel('room:sifra-clients:presence', {
+            config: {
+                presence: { key: visitorId }
+            }
+        });
+
+        const updateOnlinePresence = () => {
+            const onlineMembers = Object.keys(presenceChannel.presenceState()).length;
+            const presenceLabel = document.querySelector('#online-presence span:last-child');
+            if (presenceLabel) {
+                presenceLabel.textContent = `${onlineMembers} ${onlineMembers === 1 ? 'client' : 'clients'} online`;
+            }
+        };
+
+        presenceChannel
+            .on('presence', { event: 'sync' }, updateOnlinePresence)
+            .subscribe(async status => {
+                if (status === 'SUBSCRIBED') {
+                    await presenceChannel.track({
+                        user_id: visitorId,
+                        online_at: new Date().toISOString()
+                    });
+                }
+            });
 
         // 1. Mobile Menu Toggle Logic
         const menuBtn = document.getElementById('mobile-menu-btn');
