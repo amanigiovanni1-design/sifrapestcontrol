@@ -74,6 +74,38 @@ for select
 to authenticated
 using (lower(coalesce(auth.jwt() ->> 'email', '')) = 'amanigiovanni1@gmail.com');
 
+create or replace function public.get_staff_bookings()
+returns setof public.bookings
+language sql
+security definer
+set search_path = public
+as $$
+    select *
+    from public.bookings
+    where lower(coalesce(auth.jwt() ->> 'email', '')) = 'amanigiovanni1@gmail.com'
+       or coalesce(auth.jwt() -> 'app_metadata' ->> 'role', '') = 'staff'
+    order by created_at desc;
+$$;
+
+revoke all on function public.get_staff_bookings() from public, anon;
+grant execute on function public.get_staff_bookings() to authenticated;
+
+create or replace function public.get_staff_clients()
+returns setof public.clients
+language sql
+security definer
+set search_path = public
+as $$
+    select *
+    from public.clients
+    where lower(coalesce(auth.jwt() ->> 'email', '')) = 'amanigiovanni1@gmail.com'
+       or coalesce(auth.jwt() -> 'app_metadata' ->> 'role', '') = 'staff'
+    order by created_at desc;
+$$;
+
+revoke all on function public.get_staff_clients() from public, anon;
+grant execute on function public.get_staff_clients() to authenticated;
+
 -- Create each staff account in Supabase Authentication, then assign its role with:
 -- update auth.users
 -- set raw_app_meta_data = coalesce(raw_app_meta_data, '{}'::jsonb) || '{"role":"staff"}'::jsonb
