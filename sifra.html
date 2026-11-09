@@ -635,10 +635,17 @@
 
         const loadStaffData = async () => {
             document.getElementById('staff-data-error').classList.add('hidden');
-            const [bookingsResult, membersResult] = await Promise.all([
+            let [bookingsResult, membersResult] = await Promise.all([
                 sifraSupabase.rpc('get_staff_bookings'),
                 sifraSupabase.rpc('get_staff_clients')
             ]);
+
+            if (bookingsResult.error?.code === 'PGRST202') {
+                bookingsResult = await sifraSupabase.from('bookings').select('*').order('created_at', { ascending: false });
+            }
+            if (membersResult.error?.code === 'PGRST202') {
+                membersResult = await sifraSupabase.from('clients').select('*').order('created_at', { ascending: false });
+            }
 
             if (bookingsResult.error || membersResult.error) {
                 showStaffDataError(bookingsResult.error || membersResult.error);
