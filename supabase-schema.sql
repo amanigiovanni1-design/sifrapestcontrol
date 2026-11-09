@@ -106,6 +106,8 @@ $$;
 revoke all on function public.get_staff_clients() from public, anon;
 grant execute on function public.get_staff_clients() to authenticated;
 
+notify pgrst, 'reload schema';
+
 -- Create each staff account in Supabase Authentication, then assign its role with:
 -- update auth.users
 -- set raw_app_meta_data = coalesce(raw_app_meta_data, '{}'::jsonb) || '{"role":"staff"}'::jsonb
