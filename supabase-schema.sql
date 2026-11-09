@@ -108,6 +108,27 @@ grant execute on function public.get_staff_clients() to authenticated;
 
 notify pgrst, 'reload schema';
 
+-- Optional demo records. Run this section only when dummy staff-dashboard data is wanted.
+insert into public.clients
+    (full_name, phone, email, property_type, address, marketing_consent)
+values
+    ('Test Client One', '+260970000001', 'dummy.client1@example.com', 'Residential home', '1 Test Street, Lusaka', true),
+    ('Test Client Two', '+260970000002', 'dummy.client2@example.com', 'Office / commercial', '2 Sample Avenue, Lusaka', false)
+on conflict (email) do nothing;
+
+insert into public.bookings
+    (full_name, phone, email, service, preferred_date, preferred_time, message)
+select demo.*
+from (values
+    ('Test Booking One'::text, '+260970000011'::text, 'dummy.booking1@example.com'::text, 'Termite Inspection & Treatment'::text, '2026-11-12'::date, '10:00:00'::time, 'Dummy booking for staff dashboard testing.'::text),
+    ('Test Booking Two'::text, '+260970000012'::text, 'dummy.booking2@example.com'::text, 'Rodent Control'::text, '2026-11-13'::date, '14:00:00'::time, 'Dummy booking for staff dashboard testing.'::text)
+) as demo(full_name, phone, email, service, preferred_date, preferred_time, message)
+where not exists (
+    select 1
+    from public.bookings existing
+    where existing.email in ('dummy.booking1@example.com', 'dummy.booking2@example.com')
+);
+
 -- Create each staff account in Supabase Authentication, then assign its role with:
 -- update auth.users
 -- set raw_app_meta_data = coalesce(raw_app_meta_data, '{}'::jsonb) || '{"role":"staff"}'::jsonb
