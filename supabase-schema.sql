@@ -53,12 +53,26 @@ for select
 to authenticated
 using ((auth.jwt() -> 'app_metadata' ->> 'role') = 'staff');
 
+drop policy if exists "Registered staff email can view client registrations" on public.clients;
+create policy "Registered staff email can view client registrations"
+on public.clients
+for select
+to authenticated
+using (lower(coalesce(auth.jwt() ->> 'email', '')) = 'amanigiovanni1@gmail.com');
+
 drop policy if exists "Staff can view bookings" on public.bookings;
 create policy "Staff can view bookings"
 on public.bookings
 for select
 to authenticated
 using ((auth.jwt() -> 'app_metadata' ->> 'role') = 'staff');
+
+drop policy if exists "Registered staff email can view bookings" on public.bookings;
+create policy "Registered staff email can view bookings"
+on public.bookings
+for select
+to authenticated
+using (lower(coalesce(auth.jwt() ->> 'email', '')) = 'amanigiovanni1@gmail.com');
 
 -- Create each staff account in Supabase Authentication, then assign its role with:
 -- update auth.users

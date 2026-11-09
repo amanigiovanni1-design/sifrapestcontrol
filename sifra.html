@@ -590,7 +590,12 @@
             staffLoginError.classList.remove('hidden');
         };
 
-        const isStaff = (session) => session?.user?.app_metadata?.role === 'staff';
+        const isStaff = (session) => {
+            const user = session?.user;
+            return user?.app_metadata?.role === 'staff'
+                || user?.user_metadata?.role === 'staff'
+                || user?.email?.toLowerCase() === 'amanigiovanni1@gmail.com';
+        };
 
         staffLoginButton.addEventListener('click', () => {
             staffLoginModal.classList.remove('hidden');
