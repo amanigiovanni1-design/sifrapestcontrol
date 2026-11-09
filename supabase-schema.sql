@@ -27,6 +27,8 @@ alter table public.clients enable row level security;
 alter table public.bookings enable row level security;
 
 grant usage on schema public to anon, authenticated;
+grant insert on public.clients to anon;
+grant insert on public.bookings to anon;
 grant select on public.clients to authenticated;
 grant select on public.bookings to authenticated;
 

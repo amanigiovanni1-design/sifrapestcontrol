@@ -675,6 +675,12 @@
             }
         };
 
+        const ensureStaffSession = async () => {
+            const { data, error } = await sifraSupabase.auth.refreshSession();
+            if (error) return null;
+            return data.session;
+        };
+
         const showStaffDashboard = async (session) => {
             if (!isStaff(session)) {
                 await sifraSupabase.auth.signOut();
@@ -734,6 +740,11 @@
 
         sifraSupabase.auth.getSession().then(({ data }) => {
             if (isStaff(data.session)) showStaffDashboard(data.session);
+            else if (data.session) {
+                ensureStaffSession().then((session) => {
+                    if (isStaff(session)) showStaffDashboard(session);
+                });
+            }
         });
     </script>
 </body>
